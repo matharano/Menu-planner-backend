@@ -56,7 +56,7 @@ class Database:
 
     def setup(self) -> None:
         """Create database and tables"""
-        with open('setup.sql', 'r') as sqlfile:
+        with open('sql-scripts/setup.sql', 'r') as sqlfile:
             commands = sqlfile.read()
             for command in commands.split(';'):
                 if len(command.replace('\n', '').replace(' ', '')) == 0: continue
