@@ -19,9 +19,3 @@ def init_logging(name:str, log_level=LOGLEVEL):
 
     rootLogger.setLevel(log_level)
     return rootLogger
-
-def get_log(name:str) -> logging.Logger:
-    if logging.getLogger(name).hasHandlers():
-        return logging.getLogger(name)
-    else:
-        return init_logging(name)

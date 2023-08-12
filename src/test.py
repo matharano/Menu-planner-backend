@@ -1,4 +1,4 @@
-import database
+from . import database
 
 def Database():
     db = database.Database()

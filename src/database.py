@@ -1,8 +1,7 @@
 import os
 import psycopg2
+import logging
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
-
-import utils
 
 USER = os.environ.get('POSTGRES_USER')
 PASSWORD = os.environ.get('POSTGRES_PASSWORD')
@@ -10,7 +9,7 @@ IP = os.environ.get('POSTGRES_IP')
 PORT = os.environ.get('POSTGRES_PORT')
 DATABASE_NAME = 'menu_planner'
 
-logger = utils.get_log('backend')
+logger = logging.getLogger('backend')
 
 class Database:
     def __init__(self, user:str=USER, password:str=PASSWORD, ip:str=IP, port:str=PORT, database_name:str=DATABASE_NAME, create_if_not_exists:bool=True) -> None:
@@ -53,6 +52,11 @@ class Database:
     
     def get(self) -> list[str]:
         return self.cursor.fetchall()
+    
+    def send_and_hear_back(self, command:str) -> list[str]:
+        """Send a command and wait for an answer"""
+        self.send(command)
+        return self.get()
 
     def setup(self) -> None:
         """Create database and tables"""
