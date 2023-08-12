@@ -23,7 +23,7 @@ CREATE TABLE menu_planner.menu (
 CREATE TABLE menu_planner.dishes (
     id SERIAL PRIMARY KEY,
     category VARCHAR(50),
-    name VARCHAR(50),
+    name VARCHAR(200),
     cost INTEGER,
     observation VARCHAR(200)
 );

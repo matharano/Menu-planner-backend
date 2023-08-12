@@ -60,14 +60,20 @@ class Database:
 
     def setup(self) -> None:
         """Create database and tables"""
-        with open('sql-scripts/setup.sql', 'r') as sqlfile:
+        with open('src/sql-scripts/setup.sql', 'r') as sqlfile:
             commands = sqlfile.read()
             for command in commands.split(';'):
                 if len(command.replace('\n', '').replace(' ', '')) == 0: continue
                 self.send(command)
 
     def drop_db(self) -> None:
-        self.send(F"DROP DATABASE {DATABASE_NAME}")
+        self.disconnect()
+        connection = psycopg2.connect(user=self.user, password=self.password, host=self.ip, port=self.port)
+        connection.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
+        cursor = connection.cursor()
+        cursor.execute(F"DROP DATABASE {DATABASE_NAME} WITH (FORCE);")
+        cursor.close()
+        connection.close()
 
 if __name__ == '__main__':
     db = Database()

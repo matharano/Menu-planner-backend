@@ -1,6 +1,9 @@
-import os
-print(os.environ.get('POSTGRES_IP'))
-from src import test
+from src import test, database
 
 if __name__ == '__main__':
-    test.Database()
+    db = database.Database()
+    db.drop_db()
+
+    db = database.Database()
+    db.setup()
+    test.populate_db()

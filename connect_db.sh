@@ -1,0 +1,1 @@
+psql -h $POSTGRES_IP -p $POSTGRES_PORT -U $POSTGRES_USER -W $POSTGRES_PASSWORD -d menu_planner

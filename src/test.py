@@ -7,5 +7,8 @@ def Database():
     database.logger.info(db.get())
     db.disconnect()
 
-if __name__ == '__main__':
-    Database()
+def populate_db():
+    db = database.Database()
+    with open('src/sql-scripts/demo_data.sql', 'r') as sql:
+        command = sql.read()
+        db.send(command)
