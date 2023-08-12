@@ -61,9 +61,33 @@ class Database:
     def register(self, table:str, data:list) -> int:
         """Insert new data into table and return id of the new entry"""
         self.send(f"SELECT column_name FROM information_schema.columns WHERE table_schema = 'menu_planner' AND table_name = '{table}'")
-        columns = self.get()
-        self.send(f"INSERT INTO menu_planner.{table}({', '.join([col[0] for col in columns if col[0] != 'id'])}) VALUES {data} RETURNING id")
+        columns = [col[0] for col in self.get() if col[0] != 'id']
+        self.send(f"INSERT INTO menu_planner.{table}({', '.join(columns)}) VALUES {data} RETURNING id")
         return self.get()[0][0]
+    
+    def update(self, table:str, id:int, data:list) -> tuple[bool, str]:
+        """Update the values of and id. Returns if True if successful, and the message otherwise"""
+        self.send(f"SELECT column_name FROM information_schema.columns WHERE table_schema = 'menu_planner' AND table_name = '{table}'")
+        columns = [col[0] for col in self.get() if col[0] != 'id']
+        changes = ', '.join([" = ".join(col, value) for col, value in zip(columns, data)])
+        self.send(f"UPDATE menu_planner.{table} SET id = {id}, {changes} WHERE id = {id}")
+        response = self.get()
+        if response == ['UPDATE 1']:
+            return True, ''
+        else:
+            return False, response
+        
+    def delete(self, table:str, id:int) -> tuple[bool, str]:
+        """Delete the entry of and id. Returns if True if successful, and the message otherwise"""
+        self.send(f"DELETE FROM menu_planner.{table} WHERE id = {id} RETURNING id")
+        response = self.get()
+        try:
+            if response[0][0] == int(id):
+                return True, ''
+            else:
+                raise NameError()
+        except:
+            return False, response
 
     def setup(self) -> None:
         """Create database and tables"""
