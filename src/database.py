@@ -58,6 +58,13 @@ class Database:
         self.send(command)
         return self.get()
 
+    def register(self, table:str, data:list) -> int:
+        """Insert new data into table and return id of the new entry"""
+        self.send(f"SELECT column_name FROM information_schema.columns WHERE table_schema = 'menu_planner' AND table_name = '{table}'")
+        columns = self.get()
+        self.send(f"INSERT INTO menu_planner.{table}({', '.join([col[0] for col in columns if col[0] != 'id'])}) VALUES {data} RETURNING id")
+        return self.get()[0][0]
+
     def setup(self) -> None:
         """Create database and tables"""
         with open('src/sql-scripts/setup.sql', 'r') as sqlfile:

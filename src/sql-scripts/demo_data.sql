@@ -12,13 +12,12 @@ VALUES
     ('Guarnição', 'Brócolis al dente com cebola, alho e azeite', 1, 'Cortar cebola em meia lua'),
     ('Guarnição', 'Cenoura juliene refogada com ovos de codorna', 1, ''),
     ('Guarnição', 'Vagem ao molho pesto', 1, ''),
-    ('Guarnição', 'Trota de abobrinha', 1, 'Fazer na forma retangular para cortar quadrados para dieta xuxu'),
+    ('Guarnição', 'Torta de abobrinha', 1, 'Fazer na forma retangular para cortar quadrados para dieta xuxu'),
     ('Guarnição', 'Banana da terra assada', 1, ''),
     ('Guarnição', 'Quiche ao alho poró', 1, 'c/g c/L'),
     ('Chá', 'Casca de laranja, canela e capim cidreira', 1, ''),
     ('Arroz branco', 'Normal', 1, ''),
     ('Arroz integral', 'Normal', 1, ''),
-    ('Feijão', 'Carioca', 1, ''),
     ('Carne bovina', 'Cuiabaninho', 3, ''),
     ('Frango', 'Cubos de filé de frango marinado ao suco de laranja com sal, alho, salsa e orégano ', 2, 'cubos 2x2'),
     ('Peixe', 'Ventrecha assada empanada no fubá', 2, 'Passar no molho de tomate ao sugo e depois no fubá'),
@@ -29,6 +28,5 @@ VALUES
     ('Guarnição', 'Abobrinha verde', 1, 'Rodelas não muito finas, passar ovo e flocos de milho temperada com sal,alho e orégano'),
     ('Guarnição', 'Risoto de abóbora Cabotiã', 1, 'Ver o vídeo Bia - com alho poró'),
     ('Guarnição', 'Creme de milho verde', 1, ''),
-    ('Guarnição', 'Banana da terra assada', 1, ''),
     ('Chá', 'Camomila com abacaxi', 1, '')
 ;

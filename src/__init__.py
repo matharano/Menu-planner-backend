@@ -10,4 +10,5 @@ def create_app():
     app = Flask(__name__)
     app.config['RESTX_MASK_SWAGGER'] = False
     api.init_app(app)
+    # register_models(api)
     return app
